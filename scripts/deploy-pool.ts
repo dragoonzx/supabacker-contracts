@@ -3,7 +3,7 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-import SupabackerMarketplaceV1Artifacts from "../artifacts/contracts/SupabackerMarketplaceV1.sol/SupabackerMarketplaceV1.json";
+import SupabackerDefiPoolV1Artifacts from "../artifacts/contracts/SupabackerDefiPoolV1.sol/SupabackerDefiPoolV1.json";
 import {
   AccountBalanceQuery,
   AccountId,
@@ -50,7 +50,7 @@ async function main() {
 
   const fileAppendTx = new FileAppendTransaction()
     .setFileId(fileCreateRx.fileId ? fileCreateRx.fileId : "")
-    .setContents(SupabackerMarketplaceV1Artifacts.bytecode)
+    .setContents(SupabackerDefiPoolV1Artifacts.bytecode)
     .setMaxChunks(40);
 
   const fileAppendSubmit = await fileAppendTx.execute(client);

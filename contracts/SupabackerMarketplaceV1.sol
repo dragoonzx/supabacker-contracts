@@ -19,6 +19,7 @@ contract SupabackerMarketplaceV1 is ERC721, ERC721Enumerable, ERC721URIStorage {
 
     struct Project {
         uint balance;
+        string cid;
         EnumerableMap.AddressToUintMap backersDeposits;
     }
 
@@ -30,7 +31,8 @@ contract SupabackerMarketplaceV1 is ERC721, ERC721Enumerable, ERC721URIStorage {
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
 
-        allProjects.push();
+        Project storage newProj = allProjects.push();
+        newProj.cid = uri;
     }
 
     function donateToProject(uint projectId) public payable {
@@ -73,6 +75,14 @@ contract SupabackerMarketplaceV1 is ERC721, ERC721Enumerable, ERC721URIStorage {
 
         for (uint256 i = 0; i < length; i++) {
             (addresses[i], amounts[i]) = getProjectBackerByIndex(projectId, i);
+        }
+    }
+
+    function getProjectUrls() public view returns (string[] memory urls) {
+        uint length = allProjects.length;
+        urls = new string[](length);
+        for (uint256 i = 0; i < length; i++) {
+            urls[i] = allProjects[i].cid;
         }
     }
 

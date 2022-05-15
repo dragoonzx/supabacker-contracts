@@ -13,6 +13,7 @@ describe("Supabacker Marketplace test", function () {
 
   it("Should create project, donate & withdraw funds", async function () {
     await marketplaceV1.createProject("134n1jc1d1");
+    console.log("get token URIs: ", await marketplaceV1.getProjectUrls());
     await marketplaceV1.donateToProject(0, { value: 10000 });
     console.log("balance: " + (await marketplaceV1.getProjectBalance(0)));
     console.log("count: " + (await marketplaceV1.getProjectsCount()));
